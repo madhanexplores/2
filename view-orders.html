@@ -3,12 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>View Orders</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Orders</h1>
-    <ul id="ordersList"></ul>
-    <script src="viewOrders.js"></script>
+    <header>
+        <h1>Orders List</h1>
+    </header>
+
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="chair1.html">Chair 1</a></li>
+            <li><a href="chair2.html">Chair 2</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Your Orders</h2>
+            <div id="orders-container">
+                <!-- Orders will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Luxury Dining System. All rights reserved.</p>
+    </footer>
+
+    <script src="view-orders.js"></script>
 </body>
 </html>

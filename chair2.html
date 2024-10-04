@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order at Chair 2</title>
     <link rel="stylesheet" href="style.css">
-    <title>Chair 2 Order</title>
 </head>
 <body>
-    <h1>Order Food from Chair 2</h1>
-    <form id="orderForm">
-        <label for="food">Select Food:</label>
-        <select id="food" name="food" required>
-            <option value="">--Please choose an option--</option>
-            <option value="Pizza">Pizza</option>
-            <option value="Burger">Burger</option>
-            <option value="Pasta">Pasta</option>
-        </select>
-        <button type="submit">Place Order</button>
-    </form>
+    <header>
+        <h1>Order for Chair 2</h1>
+    </header>
+
+    <main class="order-section">
+        <form id="orderForm">
+            <label for="order">What would you like to order?</label>
+            <p class="menu">Available: Parota, Biryani</p>
+            <input type="text" id="order" placeholder="Enter your order here" required>
+            <button type="submit">Place Order</button>
+        </form>
+        <div id="responseMessage"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Luxury Dining System. All rights reserved.</p>
+    </footer>
+
     <script src="app.js"></script>
 </body>
 </html>

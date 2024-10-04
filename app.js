@@ -1,33 +1,32 @@
-const form = document.getElementById('orderForm');
+document.getElementById('orderForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
 
-if (form) {
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent form submission
+    const orderInput = document.getElementById('order');
+    const order = orderInput.value;
+    const chair = window.location.pathname.includes('chair1') ? 1 : 2; // Determine chair number
 
-        const food = document.getElementById('food').value;
-        const orderData = {
-            chair: '1', // Change to '2' in chair2.html
-            food: food
-        };
-
-        try {
-            const response = await fetch('http://localhost:3000/order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(orderData)
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            alert(data.message); // Show success message
-        } catch (error) {
-            console.error('Error placing order:', error);
-            alert('Error placing order: ' + error);
+    // Make a POST request to the server to place the order
+    fetch('http://localhost:3000/order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ chair, order })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
+        return response.json();
+    })
+    .then(data => {
+        const responseMessage = document.getElementById('responseMessage');
+        responseMessage.textContent = data.message;
+        orderInput.value = ''; // Clear input after submission
+    })
+    .catch(error => {
+        console.error('Error placing order:', error);
+        const responseMessage = document.getElementById('responseMessage');
+        responseMessage.textContent = 'Error placing order: ' + error.message;
     });
-}
+});

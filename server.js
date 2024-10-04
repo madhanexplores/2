@@ -1,24 +1,31 @@
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors'); // Import the CORS package
 const app = express();
-const PORT = 3000;
+const port = 3000;
 
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Parse JSON bodies
+// Enable CORS for all origins
+app.use(cors());
 
-let orders = [];
+// Middleware to parse JSON data
+app.use(express.json());
 
+// Route to handle order submission
 app.post('/order', (req, res) => {
-    const order = req.body; // Get the order from the request body
-    orders.push(order); // Store the order
-    console.log('Order received:', order);
-    res.status(201).json({ message: 'Order placed successfully!' });
+    const { chair, order } = req.body;
+
+    console.log('Received POST request to /order');
+    console.log('Chair:', chair);
+    console.log('Order:', order);
+
+    if (!chair || !order) {
+        res.status(400).json({ message: 'Invalid order' });
+        return;
+    }
+
+    res.json({ message: `Order received successfully from chair ${chair}`, order });
 });
 
-app.get('/orders', (req, res) => {
-    res.json(orders); // Send back all orders
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });

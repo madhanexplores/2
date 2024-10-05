@@ -1,8 +1,12 @@
 document.getElementById('orderForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission
 
-    const orderInput = document.getElementById('order');
-    const order = orderInput.value;
+    const orderSelect = document.getElementById('orderSelect');
+    const order = orderSelect.value;
+
+    const quantityInput = document.getElementById('quantity');
+    const quantity = quantityInput.value;
+
     const chair = window.location.pathname.includes('chair1') ? 1 : 2; // Determine chair number based on URL
 
     // Make a POST request to the server to place the order
@@ -11,7 +15,8 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ chair, order })
+        // Correctly format the body using template literals
+        body: JSON.stringify({ chair, order: `${order} (Qty: ${quantity})` })
     })
     .then(response => {
         if (!response.ok) {
@@ -22,7 +27,8 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
     .then(data => {
         const responseMessage = document.getElementById('responseMessage');
         responseMessage.textContent = data.message;
-        orderInput.value = ''; // Clear input after submission
+        orderSelect.value = ''; // Reset selection
+        quantityInput.value = 1; // Reset quantity
     })
     .catch(error => {
         console.error('Error placing order:', error);

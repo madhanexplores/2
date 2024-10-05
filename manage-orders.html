@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Orders</title>
+    <title>Manage Orders</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Orders</h1>
-    <button id="loadOrders">Load Orders</button>
+    <h1>Manage Orders</h1>
     <div id="ordersContainer"></div>
 
     <script>
-        document.getElementById('loadOrders').addEventListener('click', function() {
+        // Function to load orders from the server
+        function loadOrders() {
             fetch('http://localhost:3000/orders')
                 .then(response => {
                     if (!response.ok) {
@@ -29,10 +29,10 @@
                         return;
                     }
 
-                    // Show new orders at the top
+                    // Sort orders so the newest ones are on top
                     data.sort((a, b) => new Date(b.time) - new Date(a.time));
 
-                    data.forEach(order => {
+                    data.forEach((order, index) => {
                         const orderDiv = document.createElement('div');
                         orderDiv.innerHTML = `
                             <p>Chair: ${order.chair}</p>
@@ -40,17 +40,18 @@
                             <p>Total Amount: ₹${order.totalAmount}</p>
                             <p>Order Time: ${new Date(order.time).toLocaleString()}</p>
                             <p>Status: ${order.status}</p>
-                            ${order.status === 'Pending' ? `<button class="completeOrder" data-chair="${order.chair}">Complete Order</button>` : ''}
+                            <button class="deleteOrder" data-index="${index}">Delete Order</button>
                             <hr>
                         `;
                         ordersContainer.appendChild(orderDiv);
                     });
 
-                    // Add event listeners to the complete buttons
-                    document.querySelectorAll('.completeOrder').forEach(button => {
+                    // Add event listeners for delete buttons
+                    const deleteButtons = document.querySelectorAll('.deleteOrder');
+                    deleteButtons.forEach(button => {
                         button.addEventListener('click', function() {
-                            const chair = this.getAttribute('data-chair');
-                            completeOrder(chair);
+                            const index = this.dataset.index;
+                            deleteOrder(index);
                         });
                     });
                 })
@@ -58,11 +59,12 @@
                     console.error('Error fetching orders:', error);
                     alert('Error fetching orders: ' + error.message);
                 });
-        });
+        }
 
-        function completeOrder(chair) {
-            fetch(`http://localhost:3000/finish-order/${chair}`, {
-                method: 'POST'
+        // Function to delete an order
+        function deleteOrder(index) {
+            fetch(`http://localhost:3000/order/${index}`, {
+                method: 'DELETE'
             })
             .then(response => {
                 if (!response.ok) {
@@ -72,13 +74,16 @@
             })
             .then(data => {
                 alert(data.message);
-                document.getElementById('loadOrders').click(); // Reload orders
+                loadOrders(); // Reload orders after deletion
             })
             .catch(error => {
-                console.error('Error completing order:', error);
-                alert('Error completing order: ' + error.message);
+                console.error('Error deleting order:', error);
+                alert('Error deleting order: ' + error.message);
             });
         }
+
+        // Load orders on page load
+        loadOrders();
     </script>
 </body>
 </html>

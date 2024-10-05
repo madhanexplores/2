@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chair 1</title>
+    <title>Chair 2</title>
     <link rel="stylesheet" href="style.css"> <!-- Link to your CSS -->
     <style>
         /* Inline styles for clarity; you can move this to your CSS file */
@@ -19,7 +19,7 @@
 </head>
 <body>
     <header>
-        <h1>Chair 1 - Menu</h1>
+        <h1>Chair 2 - Menu</h1>
     </header>
     <form id="orderForm">
         <div id="menuContainer"></div>
@@ -106,7 +106,7 @@
             }, 0);
 
             // Make a POST request to the server to place the order
-            fetch('https://kpmrestaurant.vercel.app//order', {
+            fetch('https://kpmrestaurant.vercel.app/api/order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -134,7 +134,7 @@
 
         // Clear all orders when button is clicked
         document.getElementById('clearOrdersButton').addEventListener('click', function() {
-            fetch('https://kpmrestaurant.vercel.app//orders', {
+            fetch('https://kpmrestaurant.vercel.app/api/orders', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

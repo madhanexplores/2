@@ -10,7 +10,7 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
     const chair = window.location.pathname.includes('chair1') ? 1 : 2; // Determine chair number based on URL
 
     // Make a POST request to the server to place the order
-    fetch('https://kpmrestaurant.vercel.app/order', {
+    fetch('https://kpmrestaurant.vercel.app/api/order', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

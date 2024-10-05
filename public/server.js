@@ -42,6 +42,10 @@ app.post('/order', (req, res) => {
     orders.push({ chair, order, totalAmount, time: new Date(), status: 'Pending' });
     res.json({ message: `Order received successfully from chair ${chair}`, order, totalAmount });
 });
+const cors = require('cors');
+app.use(cors({
+    origin: 'https://kpmrestaurant.vercel.app' // Allow requests from your Vercel domain
+}));
 
 // Function to calculate total amount based on order
 function calculateTotal(order) {
@@ -106,3 +110,4 @@ app.post('/finish-order/:chair', (req, res) => {
         res.status(404).json({ message: 'Order not found or already finished.' });
     }
 });
+app.use(cors()); // Allow all origins

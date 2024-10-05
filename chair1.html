@@ -3,28 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order at Chair 1</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Chair 1</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS -->
 </head>
 <body>
-    <header>
-        <h1>Order for Chair 1</h1>
-    </header>
+    <h1>Chair 1</h1>
+    <form id="orderForm">
+        <label for="order">Enter your order:</label>
+        <input type="text" id="order" required>
+        <button type="submit">Place Order</button>
+    </form>
+    <div id="responseMessage"></div>
 
-    <main class="order-section">
-        <form id="orderForm">
-            <label for="order">What would you like to order?</label>
-            <p class="menu">Available: Parota, Biryani</p>
-            <input type="text" id="order" placeholder="Enter your order here" required>
-            <button type="submit">Place Order</button>
-        </form>
-        <div id="responseMessage"></div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Luxury Dining System. All rights reserved.</p>
-    </footer>
-
-    <script src="app.js"></script>
+    <script src="app.js"></script> <!-- Link to your JS -->
 </body>
 </html>

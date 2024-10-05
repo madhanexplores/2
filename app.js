@@ -3,7 +3,7 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
 
     const orderInput = document.getElementById('order');
     const order = orderInput.value;
-    const chair = window.location.pathname.includes('chair1') ? 1 : 2; // Determine chair number
+    const chair = window.location.pathname.includes('chair1') ? 1 : 2; // Determine chair number based on URL
 
     // Make a POST request to the server to place the order
     fetch('http://localhost:3000/order', {

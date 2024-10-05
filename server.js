@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors'); // Import the CORS package
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
@@ -8,6 +8,9 @@ app.use(cors());
 
 // Middleware to parse JSON data
 app.use(express.json());
+
+// Array to hold orders
+const orders = [];
 
 // Route to handle order submission
 app.post('/order', (req, res) => {
@@ -18,11 +21,23 @@ app.post('/order', (req, res) => {
     console.log('Order:', order);
 
     if (!chair || !order) {
-        res.status(400).json({ message: 'Invalid order' });
-        return;
+        return res.status(400).json({ message: 'Invalid order' });
     }
 
+    // Store the order in the orders array
+    orders.push({ chair, order });
     res.json({ message: `Order received successfully from chair ${chair}`, order });
+});
+
+// Route to retrieve orders
+app.get('/orders', (req, res) => {
+    console.log('GET request to /orders received');
+    try {
+        res.json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 });
 
 // Start the server

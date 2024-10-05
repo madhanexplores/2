@@ -1,6 +1,6 @@
 // Function to load orders from the server
 function loadOrders() {
-    fetch('http://localhost:3000/orders')
+    fetch('https://kpmrestaurant.vercel.app/orders')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -50,7 +50,7 @@ function loadOrders() {
 
 // Function to delete an order
 function deleteOrder(index) {
-    fetch(`http://localhost:3000/order/${index}`, {
+    fetch(`https://kpmrestaurant.vercel.app/order/${index}`, {
         method: 'DELETE'
     })
     .then(response => {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', loadOrders);
 
 // Function to clear all orders
 function clearOrders() {
-    fetch('http://localhost:3000/clear-orders', {
+    fetch('https://kpmrestaurant.vercel.app/clear-orders', {
         method: 'DELETE',
     })
     .then(response => {
@@ -93,7 +93,7 @@ function clearOrders() {
     });
 }
 document.getElementById('clearOrdersButton').addEventListener('click', function() {
-    fetch('http://localhost:3000/clear-orders', {
+    fetch('https://kpmrestaurant.vercel.app/clear-orders', {
         method: 'DELETE'
     })
     .then(response => {

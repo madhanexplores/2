@@ -63,7 +63,7 @@
 
         // Function to delete an order
         function deleteOrder(index) {
-            fetch(`http://localhost:3000/order/${index}`, {
+            fetch(`https://kpmrestaurant.vercel.app/order/${index}`, {
                 method: 'DELETE'
             })
             .then(response => {

@@ -92,7 +92,7 @@ app.delete('/clear-orders', (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at https://kpmrestaurant.vercel.app:${port}`);
 });
 // Route to finish an order
 app.post('/finish-order/:chair', (req, res) => {

@@ -106,7 +106,7 @@
             }, 0);
 
             // Make a POST request to the server to place the order
-            fetch('http://localhost:3000/order', {
+            fetch('https://kpmrestaurant.vercel.app//order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -134,7 +134,7 @@
 
         // Clear all orders when button is clicked
         document.getElementById('clearOrdersButton').addEventListener('click', function() {
-            fetch('http://localhost:3000/orders', {
+            fetch('https://kpmrestaurant.vercel.app//orders', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

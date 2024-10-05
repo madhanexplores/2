@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Orders</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Orders</h1>
-    <button id="loadOrders">Load Orders</button>
+    <header>
+        <h1>Orders</h1>
+    </header>
+    <nav>
+        <button id="loadOrders">Load Orders</button>
+    </nav>
     <div id="ordersContainer"></div>
 
     <script>
@@ -37,7 +41,8 @@
                 })
                 .catch(error => {
                     console.error('Error fetching orders:', error);
-                    alert('Error fetching orders: ' + error.message);
+                    const ordersContainer = document.getElementById('ordersContainer');
+                    ordersContainer.innerHTML = '<p style="color: red;">Error fetching orders: ' + error.message + '</p>';
                 });
         });
     </script>
